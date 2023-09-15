@@ -1,0 +1,81 @@
+<!--Daniel Salgado Magalhães -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>RPG Store</h1>
+
+        <!-- Formulário para adicionar itens -->
+        <form id="inserirForm">
+            <div class="form-group">
+                <label for="nomeItem">Nome do Item</label>
+                <input type="text" class="form-control" id="nomeItem" name="nomeItem">
+            </div>
+            <div class="form-group">
+                <label for="tipoItem">Tipo do Item</label>
+                <input type="text" class="form-control" id="tipoItem" name="tipoItem">
+            </div>
+            <button type="button" class="btn btn-success" onclick="inserirItem()">Adicionar Item</button>
+        </form>
+
+        <!-- Lista de Itens -->
+        <div class="mt-4">
+            <h2>Lista de Itens:</h2>
+            <ul id="listaItens"></ul>
+        </div>
+        
+        <!-- Formulário para remover itens -->
+        <form id="removerForm">
+            <div class="form-group">
+                <label for="idItem">ID do Item que será excluído</label>
+                <input type="number" class="form-control" id="idItem" name="idItem">
+            </div>
+            <button type="button" class="btn btn-danger" onclick="removerItem()">Remover Item</button>
+        </form>
+    </div>
+
+    <script>
+        function inserirItem() {
+            const nome = document.getElementById("nomeItem").value;
+            const tipo = document.getElementById("tipoItem").value;
+            const listaItens = document.getElementById("listaItens");
+
+            if (nome && tipo) {
+                const novoItem = document.createElement("li");
+                novoItem.textContent = `Nome: ${nome}, Tipo: ${tipo}`;
+                listaItens.appendChild(novoItem);
+
+                document.getElementById("nomeItem").value = "";
+                document.getElementById("tipoItem").value = "";
+            } else {
+                alert("Preencha todos os campos!");
+            }
+        }
+
+        function removerItem() {
+            const id = document.getElementById("idItem").value;
+            const listaItens = document.getElementById("listaItens");
+            const itemARemover = document.querySelector(`#listaItens li:nth-child(${id})`);
+
+            if (itemARemover) {
+                listaItens.removeChild(itemARemover);
+                document.getElementById("idItem").value = "";
+            } else {
+                alert("O item com o ID especificado não foi encontrado na lista!");
+            }
+        }
+    </script>
+
+    <!-- Scripts para Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
