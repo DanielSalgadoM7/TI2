@@ -19,3 +19,5 @@ CREATE SEQUENCE public."id-item"
 
 -- Define a coluna 'id' para usar a sequência
 ALTER TABLE public.item ALTER COLUMN id SET DEFAULT nextval('public."id-item"'::regclass);
+
+ALTER TABLE public."id-item" OWNER TO ti2cc;
