@@ -49,7 +49,7 @@ public class ItensDAO extends DAO {
 			String sql = "SELECT * FROM item WHERE id="+id;
 			ResultSet rs = st.executeQuery(sql);	
 	        if(rs.next()){            
-	        	 item = new Item(rs.getInt("id"), rs.getInt("qnt"), (float)rs.getDouble("preco");
+	        	 item = new Item(rs.getInt("id"), rs.getString("nome"), rs.getInt("qnt"), (float)rs.getDouble("preco");
 	        }
 	        st.close();
 		} catch (Exception e) {
@@ -84,7 +84,7 @@ public class ItensDAO extends DAO {
 			String sql = "SELECT * FROM item" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
 			ResultSet rs = st.executeQuery(sql);	           
 	        while(rs.next()) {	            	
-	        	Item i = new Produto(rs.getInt("id"), rs.getInt("quantidade"), (float)rs.getDouble("preco");
+	        	Item i = new Produto(rs.getInt("id"), rs.getString("nome"), rs.getInt("quantidade"), (float)rs.getDouble("preco");
 	            itens.add(i);
 	        }
 	        st.close();
@@ -98,7 +98,7 @@ public class ItensDAO extends DAO {
 	public boolean update(Item item) {
 		boolean status = false;
 		try {  
-			String sql = "UPDATE produto SET qnt = '" + produto.getQnt() + "', "
+			String sql = "UPDATE produto SET qnt = '" + produto.getNome() + "', " + produto.getQnt() + "', "
 					   + "preco = " + produto.getPreco();
 			PreparedStatement st = conexao.prepareStatement(sql);
 			st.executeUpdate();
